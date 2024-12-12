@@ -3,24 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PV-Produktion</title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Verbrauch Haushalt</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>PV-Produktion</h1>
+      <h1>Verbrauch Haushalt</h1>
       <div class="slider-container">
-        <h2>Gelieferte Leistung</h2>
+        <h2>Verbrauch für jede Stunde</h2>
         <div id="sliders">
           <!-- Schieberegler werden hier dynamisch eingefügt -->
         </div>
       </div>
       <div class="chart-container">
-        <h2>PV-Leistung über den Tag</h2>
-        <canvas id="pvChart"></canvas>
+        <h2>Haushaltsverbrauch über den Tag</h2>
+        <canvas id="consumptionChart"></canvas>
       </div>
     </div>
-    <script type="module" src="../js/pv.js"></script>
+    <script type="module" src="consumption.js"></script>
   </body>
 </html>
