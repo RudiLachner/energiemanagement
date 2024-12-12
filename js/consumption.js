@@ -3,10 +3,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const slidersContainer = document.getElementById('sliders');
 
-  // PV-Daten aus Session Storage laden oder mit Standardwerten initialisieren
-  const pvData = JSON.parse(sessionStorage.getItem('pvData')) || [
-    0, 0, 0, 0, 0, 0, 50, 150, 300, 500, 700, 800, 850, 800, 700, 500, 300, 150,
-    50, 0, 0, 0, 0, 0,
+  // Verbrauchsdaten aus Session Storage laden oder mit Standardwerten initialisieren
+  const consumptionData = JSON.parse(
+    sessionStorage.getItem('consumptionData')
+  ) || [
+    400, 380, 370, 360, 350, 340, 850, 600, 380, 400, 400, 700, 1200, 850, 600,
+    450, 550, 450, 750, 1100, 600, 750, 600, 450,
   ];
 
   // Dynamisch Schieberegler erstellen
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timeLabel.style.marginBottom = '5px';
 
     const valueLabel = document.createElement('span');
-    valueLabel.textContent = `${pvData[hour]} W`;
+    valueLabel.textContent = `${consumptionData[hour]} W`;
     valueLabel.style.fontSize = '1em';
     valueLabel.style.color = '#fff';
     valueLabel.style.marginTop = '5px';
@@ -29,18 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const slider = document.createElement('input');
     slider.type = 'range';
     slider.min = 0;
-    slider.max = 5000; // Maximal 5000 W
-    slider.value = pvData[hour];
+    slider.max = 5000;
+    slider.value = consumptionData[hour];
     slider.dataset.hour = hour;
 
-    // Event-Listener für Änderungen
     slider.addEventListener('input', event => {
       const hourIndex = event.target.dataset.hour;
-      pvData[hourIndex] = Number(event.target.value);
-      valueLabel.textContent = `${pvData[hourIndex]} W`;
+      consumptionData[hourIndex] = Number(event.target.value);
+      valueLabel.textContent = `${consumptionData[hourIndex]} W`;
       updateChart();
       saveToSessionStorage();
-      triggerPVDataUpdate();
     });
 
     sliderWrapper.appendChild(timeLabel);
@@ -50,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Diagramm initialisieren
-  const ctx = document.getElementById('pvChart').getContext('2d');
-  const chartColor = 'rgba(54, 162, 235, 1)';
-  const chartBackgroundColor = 'rgba(54, 162, 235, 0.2)';
-  const pvChart = new Chart(ctx, {
-    type: 'line',
+  const ctx = document.getElementById('consumptionChart').getContext('2d');
+  const chartColor = 'rgba(255, 99, 132, 1)';
+  const chartBackgroundColor = 'rgba(255, 99, 132, 0.2)';
+  const consumptionChart = new Chart(ctx, {
+    type: 'bar',
     data: {
       labels: Array.from(
         { length: 24 },
@@ -62,12 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ),
       datasets: [
         {
-          label: 'PV-Leistung (W)',
-          data: pvData,
-          borderColor: chartColor,
+          label: 'Haushaltsverbrauch (W)',
+          data: consumptionData,
           backgroundColor: chartBackgroundColor,
+          borderColor: chartColor,
           borderWidth: 1,
-          fill: true,
         },
       ],
     },
@@ -88,18 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Diagramm aktualisieren
   function updateChart() {
-    pvChart.data.datasets[0].data = pvData;
-    pvChart.update();
+    consumptionChart.data.datasets[0].data = consumptionData;
+    consumptionChart.update();
   }
 
-  // PV-Daten im Session Storage speichern
+  // Verbrauchsdaten im Session Storage speichern
   function saveToSessionStorage() {
-    sessionStorage.setItem('pvData', JSON.stringify(pvData));
-  }
-
-  // Event auslösen, wenn PV-Daten geändert werden
-  function triggerPVDataUpdate() {
-    const event = new CustomEvent('pvDataUpdated', { detail: [...pvData] });
-    window.dispatchEvent(event);
+    sessionStorage.setItem('consumptionData', JSON.stringify(consumptionData));
   }
 });
