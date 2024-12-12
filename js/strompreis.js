@@ -4,7 +4,7 @@ import {
   fetchPrices,
   fetchYesterdayPrices,
   fetchLast7DaysPrices,
-} from './api.js';
+} from './data.js';
 import { createChart } from './charts.js';
 
 (async function () {

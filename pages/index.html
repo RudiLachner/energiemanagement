@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hauptübersicht</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Übersicht</h1>
+    </header>
+    <main class="dashboard">
+      <!-- Strompreis-Kachel -->
+      <div class="tile" id="price-tile">
+        <h2>Strompreis</h2>
+        <canvas id="priceComparison"></canvas>
+        <a href="./strompreis.html" class="tile-link">mehr...</a>
+      </div>
+    </main>
+    <script type="module" src="../js/index.js"></script>
+  </body>
+</html>

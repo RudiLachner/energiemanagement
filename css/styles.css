@@ -31,3 +31,47 @@ canvas {
   max-width: 100%;
   height: 400px;
 }
+
+/* Kachel-Design */
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tile {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+.tile h2 {
+  margin-bottom: 10px;
+}
+
+.tile canvas {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%;
+  height: 150px;
+}
+
+.tile-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.tile-link:hover {
+  background-color: #0056b3;
+}
